@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using OrangeBricks.Web.Models;
 
 namespace OrangeBricks.Web.Controllers.Property.Commands
 {
@@ -17,6 +16,7 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
         [Required]
         public int NumberOfBedrooms { get; set; }
 
+        [Required]
         public string SellerUserId { get; set; }
     }
 }

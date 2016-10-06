@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OrangeBricks.Web.Models
@@ -10,12 +9,15 @@ namespace OrangeBricks.Web.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(30)]
         public string PropertyType { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string StreetName { get; set; }
 
         [Required]
+        [MaxLength(500)]
         public string Description { get; set; }
 
         [Required]

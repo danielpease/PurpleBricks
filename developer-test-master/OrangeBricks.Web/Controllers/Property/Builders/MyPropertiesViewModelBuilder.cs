@@ -15,6 +15,7 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
 
         public MyPropertiesViewModel Build(string sellerId)
         {
+            // Return the sellers properties
             return new MyPropertiesViewModel
             {
                 Properties = _context.Properties

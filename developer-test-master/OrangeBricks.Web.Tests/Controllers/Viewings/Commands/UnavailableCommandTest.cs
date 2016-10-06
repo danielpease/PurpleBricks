@@ -1,15 +1,13 @@
 ﻿using System.Data.Entity;
 using NSubstitute;
 using NUnit.Framework;
-using OrangeBricks.Web.Controllers.Property.Commands;
 using OrangeBricks.Web.Models;
-using OrangeBricks.Web.Controllers.Offers.Commands;
 using System.Collections.Generic;
 using OrangeBricks.Web.Controllers.Viewings.Commands;
 using OrangeBricks.Web.Tests.Controllers.Property.Builders;
 using System.Linq;
 
-namespace OrangeBricks.Web.Tests.Controllers.Viewings
+namespace OrangeBricks.Web.Tests.Controllers.Viewings.Commands
 {
     [TestFixture]
     public class UnavailableCommandTest

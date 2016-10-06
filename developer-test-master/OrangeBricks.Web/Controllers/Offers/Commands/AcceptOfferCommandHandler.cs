@@ -1,4 +1,6 @@
 using System;
+using System.Data.Entity;
+using System.Linq;
 using OrangeBricks.Web.Models;
 
 namespace OrangeBricks.Web.Controllers.Offers.Commands
@@ -14,12 +16,20 @@ namespace OrangeBricks.Web.Controllers.Offers.Commands
 
         public void Handle(AcceptOfferCommand command)
         {
+            // Find this offer and update
             var offer = _context.Offers.Find(command.OfferId);
 
-            offer.UpdatedAt = DateTime.Now;
-            offer.Status = OfferStatus.Accepted;
+            // Ensure the user has not changed the hidden form field to accept a different offer
+            // by ensuring this offer belongs to the property
+            var property = _context.Properties.Include(p => p.Offers).FirstOrDefault(o => o.Offers.Any(i => i.Id == offer.Id));
 
-            _context.SaveChanges();
+            if (property != null && (property.Id == command.PropertyId && offer != null))
+            {
+                offer.UpdatedAt = DateTime.Now;
+                offer.Status = OfferStatus.Accepted;
+
+                _context.SaveChanges();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace OrangeBricks.Web.Controllers.Viewings.Commands
             // Get the viewing
             var viewing = _context.Viewings.Find(command.ViewingId);
 
-            // Ensure the user has not changed the hidden firm field to accept a different viewing
+            // Ensure the user has not changed the hidden form field to accept a different viewing
             // by ensuring this viewing belongs to the property
             var property = _context.Properties.Include(p => p.Viewings).FirstOrDefault(v => v.Viewings.Any(i => i.Id == viewing.Id));
 

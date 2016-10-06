@@ -5,8 +5,6 @@ using OrangeBricks.Web.Models;
 using System.Collections.Generic;
 using OrangeBricks.Web.Tests.Controllers.Property.Builders;
 using System.Linq;
-using OrangeBricks.Web.Controllers.Offers.Builders;
-using OrangeBricks.Web.Controllers.Offers.ViewModels;
 using OrangeBricks.Web.Controllers.Viewings.Builders;
 using OrangeBricks.Web.Controllers.Viewings.ViewModels;
 

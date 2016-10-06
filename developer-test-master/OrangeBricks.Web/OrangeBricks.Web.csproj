@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201610062010001_AddViewingTable.Designer.cs">
       <DependentUpon>201610062010001_AddViewingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610062102538_AddedMaxLengthOnPropertyModel.cs" />
+    <Compile Include="Migrations\201610062102538_AddedMaxLengthOnPropertyModel.Designer.cs">
+      <DependentUpon>201610062102538_AddedMaxLengthOnPropertyModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -355,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610062010001_AddViewingTable.resx">
       <DependentUpon>201610062010001_AddViewingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610062102538_AddedMaxLengthOnPropertyModel.resx">
+      <DependentUpon>201610062102538_AddedMaxLengthOnPropertyModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

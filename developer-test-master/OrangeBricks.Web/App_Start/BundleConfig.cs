@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace OrangeBricks.Web
 {
@@ -13,10 +12,6 @@ namespace OrangeBricks.Web
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
-                "~/Scripts/bootstrap-datepicker.min.js"));
-
 
             bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
                 "~/Scripts/moment.js",

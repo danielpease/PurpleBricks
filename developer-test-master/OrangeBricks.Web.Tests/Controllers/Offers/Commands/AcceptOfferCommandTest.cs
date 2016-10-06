@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using NSubstitute;
 using NUnit.Framework;
-using OrangeBricks.Web.Controllers.Property.Commands;
 using OrangeBricks.Web.Models;
 using OrangeBricks.Web.Controllers.Offers.Commands;
 using System.Collections.Generic;

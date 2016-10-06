@@ -13,16 +13,18 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 
         public void Handle(CreatePropertyCommand command)
         {
+            // Create a new property
             var property = new Models.Property
             {
-               PropertyType = command.PropertyType,
-               StreetName = command.StreetName,
-               Description = command.Description,
-               NumberOfBedrooms = command.NumberOfBedrooms
+                PropertyType = command.PropertyType,
+                StreetName = command.StreetName,
+                Description = command.Description,
+                NumberOfBedrooms = command.NumberOfBedrooms
             };
 
             property.SellerUserId = command.SellerUserId;
 
+            // Add the property
             _context.Properties.Add(property);
 
             _context.SaveChanges();
