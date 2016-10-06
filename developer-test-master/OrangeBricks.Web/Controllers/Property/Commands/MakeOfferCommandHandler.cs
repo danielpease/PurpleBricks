@@ -15,24 +15,31 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
 
         public void Handle(MakeOfferCommand command)
         {
+            // Get the property
             var property = _context.Properties.Find(command.PropertyId);
 
-            var offer = new Offer
+            if (property != null)
             {
-                Amount = command.Offer,
-                Status = OfferStatus.Pending,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            };
+                // Create a new offer
+                var offer = new Offer
+                {
+                    Amount = command.Offer,
+                    Status = OfferStatus.Pending,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    BuyerUserId = command.BuyerUserId
+                };
 
-            if (property.Offers == null)
-            {
-                property.Offers = new List<Offer>();
+                if (property.Offers == null)
+                {
+                    property.Offers = new List<Offer>();
+                }
+
+                // Add the offer
+                property.Offers.Add(offer);
+
+                _context.SaveChanges();
             }
-                
-            property.Offers.Add(offer);
-            
-            _context.SaveChanges();
         }
     }
 }

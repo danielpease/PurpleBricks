@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using OrangeBricks.Web.Attributes;
@@ -67,6 +66,7 @@ namespace OrangeBricks.Web.Controllers.Property
         public ActionResult ListForSale(ListPropertyCommand command)
         {
             var handler = new ListPropertyCommandHandler(_context);
+            command.SellerUserId = User.Identity.GetUserId();
 
             handler.Handle(command);
 
@@ -77,7 +77,7 @@ namespace OrangeBricks.Web.Controllers.Property
         public ActionResult MakeOffer(int id)
         {
             var builder = new MakeOfferViewModelBuilder(_context);
-            var viewModel = builder.Build(id);
+            var viewModel = builder.Build(id, User.Identity.GetUserId());
             return View(viewModel);
         }
 
@@ -87,9 +87,11 @@ namespace OrangeBricks.Web.Controllers.Property
         {
             var handler = new MakeOfferCommandHandler(_context);
 
+            command.BuyerUserId = User.Identity.GetUserId();
+
             handler.Handle(command);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("MyOffers", "Offers");
         }
     }
 }

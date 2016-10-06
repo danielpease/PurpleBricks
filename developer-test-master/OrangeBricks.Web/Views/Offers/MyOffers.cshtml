@@ -1,0 +1,44 @@
+﻿@using OrangeBricks.Web.Helpers
+@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Offers.ViewModels.MyOffersViewModel
+
+@{
+    ViewBag.Title = "My Offers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (Model.Offers.Count > 0)
+{
+    <p>Here is a list of your offers:</p>
+    foreach (var property in Model.Offers)
+    {
+        <hr />
+        <h3>@property.StreetName</h3>
+        <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
+        int lastOfferId = EnumerableHelper.LastOfferItem(@property.Offers);
+        foreach (var offer in @property.Offers)
+        {
+            <br />
+            <p><strong>Offer:</strong> £@offer.Amount</p>
+            <p><strong>Date Offered:</strong> @offer.CreatedAt.ToString("dddd d MMMM yyyy hh:mm tt")</p>
+            <p><strong>Status:</strong> @offer.Status</p>
+
+            if (lastOfferId > 0)
+            {
+                if (@offer.Id == lastOfferId && @offer.Status == OfferStatus.Rejected.ToString() && @property.Offers.All(x => x.IsPending != true))
+                {
+                    <a href="@Url.Action("MakeOffer", "Property", new {id = @property.PropertyId})" class="btn btn-primary">
+                        Make Another Offer
+                    </a>
+                }
+            }
+        }
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        You haven't made any offers yet!
+    </div>
+}

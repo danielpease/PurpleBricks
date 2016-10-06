@@ -16,10 +16,10 @@
 @if (Model.HasOffers)
 {
     <p>There are @Model.Offers.Count() offers on this property...</p>
-    
+
     foreach (var offer in Model.Offers)
     {
-        <hr/>
+        <hr />
         <div>
             <p><strong>Offer Amount: </strong> £@offer.Amount</p>
             <p><strong>Offer Made At: </strong> @offer.CreatedAt.ToLongTimeString() on @offer.CreatedAt.ToShortDateString()</p>
@@ -30,6 +30,7 @@
         {
             using (Html.BeginForm("Accept", "Offers"))
             {
+                @Html.AntiForgeryToken()
                 @Html.Hidden("PropertyId", Model.PropertyId)
                 @Html.Hidden("OfferId", offer.Id)
                 <p>
@@ -38,6 +39,7 @@
             }
             using (Html.BeginForm("Reject", "Offers"))
             {
+                @Html.AntiForgeryToken()
                 @Html.Hidden("PropertyId", Model.PropertyId)
                 @Html.Hidden("OfferId", offer.Id)
                 <p>

@@ -1,26 +1,44 @@
-﻿@model OrangeBricks.Web.Controllers.Property.ViewModels.MakeOfferViewModel
+﻿@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Property.ViewModels.MakeOfferViewModel
 
 @{
     ViewBag.Title = "Make Offer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Make Offer</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>How much would you like to offer for the @Model.PropertyType on @Model.StreetName?</p>
-
-@using (Html.BeginForm("MakeOffer", "Property", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@if (Model.Status == OfferStatus.Accepted)
 {
-    <div class="form-group">
-        @Html.LabelFor(m => m.Offer, "Offer in GBP", new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.Hidden("PropertyId", Model.PropertyId)
-            @Html.TextBoxFor(m => m.Offer, new {@class = "form-control"})
-        </div>
+    <div class="alert alert-info" role="alert">
+        Your offer on this property has already been accepted!
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Make Offer" />
-        </div>
+}
+else if (Model.Status == OfferStatus.Pending)
+{
+    <div class="alert alert-info" role="alert">
+        Your offer on this property is currently pending approval!
     </div>
+}
+else
+{
+    <p>How much would you like to offer for the @Model.PropertyType on @Model.StreetName?</p>
+
+    using (Html.BeginForm("MakeOffer", "Property", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.Offer, "Offer in GBP", new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.Hidden("PropertyId", Model.PropertyId)
+                @Html.TextBoxFor(m => m.Offer, new { @maxlength = "6", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Offer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-default" value="Make Offer" />
+            </div>
+        </div>
+    }
 }
