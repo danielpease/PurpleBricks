@@ -100,9 +100,18 @@
     <Compile Include="Controllers\Offers\Builders\OffersOnPropertyViewModelBuilderTest.cs" />
     <Compile Include="Controllers\Offers\Commands\AcceptOfferCommandTest.cs" />
     <Compile Include="Controllers\Offers\Commands\RejectOfferCommandTest.cs" />
+    <Compile Include="Controllers\Property\Builders\BookViewingViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Property\Builders\MakeOfferViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Property\Builders\MyPropertiesViewModelBuilderTest.cs" />
     <Compile Include="Controllers\Property\Builders\PropertiesViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Property\Commands\BookViewingCommandHandlerTest.cs" />
     <Compile Include="Controllers\Property\Commands\CreatePropertyCommandHandlerTest.cs" />
     <Compile Include="Controllers\Property\Commands\ListPropertyCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Property\Commands\MakeOfferCommandHandlerTest.cs" />
+    <Compile Include="Controllers\Viewings\Builders\MyViewingsViewModelBuilderTest.cs" />
+    <Compile Include="Controllers\Viewings\Builders\ViewRequestsOnPropertyViewModelTest.cs" />
+    <Compile Include="Controllers\Viewings\Commands\ConfirmViewingCommandTest.cs" />
+    <Compile Include="Controllers\Viewings\Commands\UnavailableCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

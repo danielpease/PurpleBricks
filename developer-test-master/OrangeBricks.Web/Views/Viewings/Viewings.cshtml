@@ -1,0 +1,56 @@
+﻿@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Viewings.ViewModels.ViewRequestsOnPropertyViewModel
+
+@{
+    ViewBag.Title = "View Requests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>Here you can see the view requests that have been made on your property.</p>
+<p><strong>Property type:</strong> @Model.PropertyType</p>
+<p><strong>Number of bedrooms:</strong> @Model.NumberOfBedrooms</p>
+<p><strong>Street name:</strong> @Model.StreetName</p>
+@if (Model.HasViewings)
+{
+    <p>There are @Model.Viewings.Count() view requests on this property...</p>
+
+    foreach (var viewing in Model.Viewings)
+    {
+        <hr />
+        <div>
+            <p><strong>View Date Request: </strong> @viewing.ViewDate.ToString("dddd d MMMM yyyy hh:mm tt")</p>
+            <p><strong>Status: </strong> @viewing.Status</p>
+        </div>
+
+        if (viewing.IsPending)
+        {
+            using (Html.BeginForm("Confirm", "Viewings"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("PropertyId", Model.PropertyId)
+                @Html.Hidden("ViewingId", viewing.Id)
+                <p>
+                    <input type="submit" class="btn btn-default" value="Confirm Viewing" />
+                </p>
+            }
+            using (Html.BeginForm("Unavailable", "Viewings"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("PropertyId", Model.PropertyId)
+                @Html.Hidden("ViewingId", viewing.Id)
+                <p>
+                    <input type="submit" class="btn btn-default" value="Unavailable" />
+                </p>
+            }
+        }
+
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        This property has no view requests yet!
+    </div>
+}

@@ -5,26 +5,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>My Properties</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>Here is a list of your properties:</p>
-
-@foreach (var property in Model.Properties)
+@if (Model.Properties.Count > 0)
 {
-    <hr />
-    <h3>@property.StreetName</h3>
-    <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
-    <p>@property.Description</p>
+    <p>Here is a list of your properties:</p>
 
-    <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a>
-        
-    if (!property.IsListedForSale)
+    foreach (var property in Model.Properties)
     {
-        using (Html.BeginForm("ListForSale", "Property"))
-        {
-            @Html.Hidden("PropertyId", property.Id)
-            <input class="btn btn-primary" type="submit" value="List Property For Sale" />
-        }
-    }
+        <hr />
+        <h3>@property.StreetName</h3>
+        <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
+        <p>@property.Description</p>
 
+        <p><a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a></p>
+        <p><a href="@Url.Action("Viewings", "Viewings", new {id = property.Id})">See viewing requests for this property...</a></p>
+
+        if (!property.IsListedForSale)
+        {
+            using (Html.BeginForm("ListForSale", "Property"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("PropertyId", property.Id)
+                <input class="btn btn-primary" type="submit" value="List Property For Sale" />
+            }
+        }
+
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        You haven't created any properties yet!
+    </div>
 }

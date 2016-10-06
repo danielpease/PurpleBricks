@@ -33,6 +33,7 @@
                         if (User.IsInRole("Buyer"))
                         {
                             <li>@Html.ActionLink("My Offers", "MyOffers", "Offers")</li>
+                            <li>@Html.ActionLink("My Viewings", "MyViewings", "Viewings")</li>
                         }
                     }
                 </ul>
@@ -51,6 +52,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    <!-- Date Pickers -->
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/datetimepicker")
     @RenderSection("scripts", required: false)
 </body>
 </html>

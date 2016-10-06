@@ -7,13 +7,13 @@ namespace OrangeBricks.Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPropertyBuyerUserIdToOffers : IMigrationMetadata
+    public sealed partial class AddViewingTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPropertyBuyerUserIdToOffers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddViewingTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610061917386_AddPropertyBuyerUserIdToOffers"; }
+            get { return "201610062010001_AddViewingTable"; }
         }
         
         string IMigrationMetadata.Source

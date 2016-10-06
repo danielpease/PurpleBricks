@@ -1,0 +1,70 @@
+﻿@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Property.ViewModels.BookViewingViewModel
+
+@{
+    ViewBag.Title = "Book Viewing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model.Status == OfferStatus.Accepted)
+{
+    <div class="alert alert-info" role="alert">
+        You have made an offer on this property which has been accepted!
+    </div>
+}
+else if (Model.Status == OfferStatus.Pending)
+{
+    <div class="alert alert-info" role="alert">
+        You have made an offer on this property which is currently pending approval!
+    </div>
+}
+else
+{
+    if (Model.ViewingBooked)
+    {
+        <div class="alert alert-info" role="alert">
+            You have already booked a viewing on this property!
+        </div>
+    }
+    else
+    {
+        <hr />
+        <p>Select a date below to book a viewing for this property</p>
+        using (Html.BeginForm("BookViewing", "Property", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.Hidden("PropertyId", Model.PropertyId)
+                    <h3>@Model.StreetName</h3>
+                    <p>@Model.NumberOfBedrooms bedroom @Model.PropertyType</p>
+                    <div class="form-group">
+                        <p>Viewing Date:</p>
+                        <div class="input-group date" id="datetimepicker1">
+                            @Html.TextBoxFor(m => m.ViewingDate, new {@id = "datetimepicker1", @class = "form-control datepicker"})
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ViewingDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" value="Request Viewing" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'dddd DD MMMM YYYY HH:mm'
+            });
+        });
+    </script>
+}

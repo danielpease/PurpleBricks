@@ -1,0 +1,43 @@
+﻿@using OrangeBricks.Web.Helpers
+@using OrangeBricks.Web.Models
+@model OrangeBricks.Web.Controllers.Viewings.ViewModels.MyViewingsViewModel
+@{
+    ViewBag.Title = "My Viewings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model.Viewings.Count > 0)
+{
+    <p>Here is a list of your viewings:</p>
+    foreach (var property in Model.Viewings)
+    {
+        <hr />
+        <h3>@property.StreetName</h3>
+        <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
+        int lastViewRequestId = EnumerableHelper.LastViewingItem(@property.Viewings);
+        foreach (var view in @property.Viewings)
+        {
+            <br />
+            <p><strong>Viewing Date:</strong> @view.ViewDate.ToString("dddd d MMMM yyyy hh:mm tt")</p>
+            <p><strong>Status:</strong> @view.Status.ToString()</p>
+
+            if (lastViewRequestId > 0)
+            {
+                if (@view.Id == lastViewRequestId && @view.Status == ViewStatus.Unavailable.ToString() && @property.Viewings.All(x => x.IsPending != true))
+                {
+                    <a href="@Url.Action("BookViewing", "Property", new {id = @property.PropertyId})" class="btn btn-primary">
+                        Request Another Viewing
+                    </a>
+                }
+            }
+        }
+    }
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        You haven't booked any viewings yet!
+    </div>
+}
